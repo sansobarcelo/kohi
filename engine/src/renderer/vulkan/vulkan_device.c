@@ -383,12 +383,12 @@ b8 physical_device_meets_requirements(
     out_queue_info->transfer_family_index = -1;
 
     // Discrete GPU?
-    if (requirements->discrete_gpu) {
-        if (properties->deviceType != VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
-            KINFO("Device is not a discrete GPU, and one is required. Skipping.");
-            return FALSE;
-        }
-    }
+    // if (requirements->discrete_gpu) {
+    //     if (properties->deviceType != VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
+    //         KINFO("Device is not a discrete GPU, and one is required. Skipping.");
+    //         return FALSE;
+    //     }
+    // }
 
     u32 queue_family_count = 0;
     vkGetPhysicalDeviceQueueFamilyProperties(device, &queue_family_count, 0);

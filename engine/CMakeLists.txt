@@ -14,9 +14,12 @@ target_include_directories(engine PUBLIC
 )
 
 # 5. Engine Defines
+target_compile_definitions(engine PRIVATE
+    KEXPORT
+)
+
 if(WIN32)
     target_compile_definitions(engine PRIVATE
-        KEXPORT
         _CRT_SECURE_NO_WARNINGS
     )
 endif()
@@ -24,11 +27,19 @@ endif()
 # 6. Engine Flags
 # target_compile_options(engine PRIVATE -Werror)
 
-# 7. Link Vulkan HERE
+# 7. Link libraries
 target_link_libraries(engine PRIVATE
     ${Vulkan_LIBRARIES}
 )
 
 if(WIN32)
     target_link_libraries(engine PRIVATE user32)
+endif()
+
+if(UNIX AND NOT APPLE)
+    target_link_libraries(engine PRIVATE
+        xcb
+        X11
+        X11-xcb
+    )
 endif()
